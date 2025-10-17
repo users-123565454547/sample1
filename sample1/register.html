@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        .password-toggle {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .password-toggle:hover {
+            color: #3b82f6;
+        }
+        .tab {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .disability-option {
+            transition: all 0.2s;
+        }
+        .disability-option:hover {
+            background-color: #dbeafe;
+        }
+        .disability-option.selected {
+            background-color: #3b82f6;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+       
+
+        <div class="flex flex-wrap justify-center gap-8">
+            <!-- Login Card -->
+            <div class="w-full md:w-1/2 lg:w-2/5">
+                <div class="bg-white card p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Welcome </h2>
+                    <p class="text-gray-600 mb-6 text-center">Sign in </p>
+                    
+                     <form action="login.php" method="POST" class="space-y-5">
+                        <div>
+                            <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                            <input type="email" name="loginEmail" id="loginEmail" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="relative">
+                            <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password *</label>
+                            <input type="password" name="loginPassword" id="loginPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field pr-10" placeholder="Enter your password" required>
+                            <span class="absolute right-3 top-11 text-gray-500 password-toggle" onclick="togglePassword('loginPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-300">
+                                Sign In
+                            </button>
+                        </div>
+                    </form>
+
+                    
+                    
+                    
+                    <div class="mt-8 text-center border-t pt-6">
+                        <p class="text-gray-600">Don't have an account? <a href="#" id="goToRegister" class="text-blue-600 font-semibold hover:text-blue-800">Register here</a></p>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+            <!-- Registration Card -->
+            <div class="w-full md:w-1/2 lg:w-3/5 hidden" id="registrationSection">
+                <div class="bg-white card p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Register</h2>
+                    
+                           <form action="register.php" method="POST" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+                                <input type="text" name="firstName" id="firstName" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field" required>
+                            </div>
+                            
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+                                <input type="text" name="lastName" id="lastName" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field" required>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                            <input type="email" name="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field" required>
+                        </div>
+                        
+                        <div class="relative">
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password *</label>
+                            <input type="password" name="password" id="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field pr-10" required>
+                            <span class="absolute right-3 top-11 text-gray-500 password-toggle" onclick="togglePassword('password', this)">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-300">
+                                Create Account
+                            </button>
+                        </div>
+                    </form>
+
+                    
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Already have an account? <a href="#" id="goToLogin" class="text-blue-600 font-semibold hover:text-blue-800">Sign in here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and registration
+        document.getElementById('goToRegister').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('[class*="w-full md:w-1/2 lg:w-2/5"]').classList.add('hidden');
+            document.getElementById('registrationSection').classList.remove('hidden');
+        });
+
+        document.getElementById('goToLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('registrationSection').classList.add('hidden');
+            document.querySelector('[class*="w-full md:w-1/2 lg:w-2/5"]').classList.remove('hidden');
+        });
+
+        // Password visibility toggles
+        function setupPasswordToggle(toggleId, inputId) {
+            const toggle = document.getElementById(toggleId);
+            const input = document.getElementById(inputId);
+            
+            toggle.addEventListener('click', function() {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                } else {
+                    input.type = 'password';
+                    toggle.innerHTML = '<i class="fas fa-eye"></i>';
+                }
+            });
+        }
+
+        setupPasswordToggle('loginPasswordToggle', 'loginPassword');
+        setupPasswordToggle('passwordToggle', 'password');
+        setupPasswordToggle('confirmPasswordToggle', 'confirmPassword');
+
+        // Disability selection
+        const disabilityOptions = document.querySelectorAll('.disability-option');
+        disabilityOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                disabilityOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Form validation and submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would send data to the server
+            alert('Login functionality would be implemented with PHP backend.');
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would send data to the server
+            alert('Registration functionality would be implemented with PHP backend.');
+        });
+    </script>
+</body>
+</html>
